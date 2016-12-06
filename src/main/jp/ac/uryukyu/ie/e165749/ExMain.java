@@ -5,3 +5,4 @@ package jp.ac.uryukyu.ie.e165749;
  */
 public class ExMain {
 }
+//仕方ないなあ
