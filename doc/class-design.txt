@@ -1,0 +1,61 @@
+プレイヤーの初期位置をどう保存したら良いか？（プレイヤーが迷路に入った際の初期位置であって、現在位置ではない。入り口と考えよう）
+FileReaderクラスを使って1文字ずつ読み込む
+
+txtファイルの1行目をPointに保存する
+Point(int 2,int 1)
+
+迷路サイズをどう保存したら良いか？
+
+int heigth = 8;
+int width = 7;
+
+int labsize = heigth * width
+
+迷路情報をどう保存したら良いか？
+char型の配列
+
+char lab　[8][7];
+
+map.txtは一例である。同じ書式で記載された他迷路であっても同様に読み込めるようにするにはどうしたら良いか？
+プレイヤーの初期位置
+Point(int x,int y)
+
+迷路サイズ
+int heigth;
+int width;
+
+int labsize = heigth * width
+
+迷路情報
+char型の配列に保存
+char lab [heigth][width];
+
+
+アクセサ（getter/setter）は必要だろうか？
+必要だと思う
+
+他に迷路クラスが果たすべき機能はなんだろうか？
+思いつかない
+
+壁の座標情報を配列から読み取り、"移動できない座標"として認識させること。
+
+Player_Classの考案 (ここでは便宜上縦をV(上<下)、横をH(左<右)とする。)
+上→右→下→左の順に空間を調べる
+V-1(上)は壁か
+Yes	>H+1(右)は壁か
+	Yes	>V+1(下)は壁か
+		Yes >H-1(左)に移動
+		No	>V+1に移動
+	No	>H+1に移動
+No	>V-1に移動
+if(V-1 = '#')
+    if(H+1 = '#')
+        if(V+1 = '#')
+        player = H-1
+        else;
+        player = V+1
+    else;
+    player = H+1
+else;
+player = V-1
+こんな感じかな
